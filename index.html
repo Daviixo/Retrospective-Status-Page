@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/nezukoicon.ico">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="js/create.js"></script>
+
+    
+    <p><img id="gotologo" src="images/GoTo_SLogo.png" alt="gotologo" width="92" height="41"></p>
+
+
+    <br>
+    <p style="text-align:center;"><img src="images/noclogo.png" alt="Logo" width="187" height="100"></p>
+
+    <body style="background: rgba(0, 0, 0, 0.767)" body></body>
+
+    </head>
+
+    <form>
+
+        <title>NOC | Retro SP Template</title>
+
+        <div>
+
+            <div class="center">
+                <h2>NOC - Retro Status Page</h2>
+                <select onchange="location = this.options[this.selectedIndex].value;">
+                    <option value="#">GoTo Another Template</option>
+                    <option value="#">TBD</option>
+                </select>
+            </div><br>
+
+            <label for="products"><strong>Choose your products:</strong></label><br>
+
+            <select id="products" class="form-select form-select-lg mb-3" multiple aria-label=".form-select-lg example">
+                <option value='GoTo Meeting'>GoTo Meeting</option>
+                <option value='GoTo Webinar'>GoTo Webinar</option>
+                <option value='GoTo Training'>GoTo Training</option>
+                <option value='OpenVoice'>OpenVoice</option>
+                <option value='LastPass'>LastPass</option>
+                <option value='GoTo Connect'>GoTo Connect</option>
+                <option value='GoTo Pro/Central'>GoTo Pro/Central</option>
+                <option value='GoToMyPC'>GoToMyPC</option>
+                <option value='Hamachi'>Hamachi</option>
+                <option value='GoTo Resolve '>GoTo Resolve </option>
+                <option value='Grasshopper'>Grasshopper</option>
+                <option value='join.me'>join.me</option>
+                <option value='Rescue'>Rescue</option>
+                <option value='GoTo Assist Remote Support v5'>GoTo Assist Remote Support v5</option>
+                <option value='GoTo Assist Remote Support v4'>GoToA ssist Remote Support v4</option>
+                <option value='GoTo Assist Service Desk'>GoTo Assist Service Desk</option>
+                <option value='GoTo Assist Corporate'>GoTo Assist Corporate</option>
+                <option value='GoTo Assist Seelt'>GoTo Assist Seelt</option>
+                <option value='Rescue Live Guide'>Rescue Live Guide</option>
+                <option value='Rescue Live Lens'>Rescue Live Lens</option>
+                <option value='GoTo Meeting API '>GoTo Meeting API </option>
+                <option value='GoTo Training API'>GoTo Training API</option>
+                <option value='GoTo Webinar API'>GoTo Webinar API</option>
+                <option value='GoTo Connect API '>GoTo Connect API </option>
+                <option value='GoTo Assist Service Desk API'>GoTo Assist Service Desk API</option>
+                <option value='GoTo Assist Remote Support API '>GoTo Assist Remote Support API </option>
+                <option value='GoTo Assist Corporate API '>GoTo Assist Corporate API </option>
+                <option value='GoTo Developer Center Frontend'>GoTo Developer Center Frontend</option>
+                <option value='Admin API '>Admin API </option>
+                <option value='SCIM API '>SCIM API </option>
+                <option value='Authentication API '>Authentication API </option>
+                <option value='GoTo Contact Center'>GoTo Contact Center</option>
+            </select>
+
+            <div class="table-responsive"><label><strong>Date/Time (UTC)</strong></label></div>
+            
+            <div class="">
+                    <input type="datetime-local" id="dateTime" class="form-control" value="" />
+            </div>
+
+            <div class="mb-1 row">
+                <label for="duration" class="col-sm-10 col-form-label"><strong>Duration (in minutes)</strong></label>
+                <div class="col-sm-3">
+                    <input type="text" id="duration" rows="1" cols="30" wrap="soft" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="expect">Issue?</label>
+                <p style="font-size:11px">"... a subset of [PRODUCT] customers experienced..."<br>"Don't use a period (' . ') at the end of your sentence."</p>
+                <textarea class="form-control" id="issue" rows="5"></textarea>
+            </div><br>
+
+        </div>
+
+        <button type="button" class="btn btn-success" value="Copy" id="copy" onclick="createTemplate();">Create
+            Templates </button><br><br>
+
+
+        <button type="button" class="btn btn-danger" onclick="location.reload();">
+            Reset
+        </button>
+
+        <br>
+
+    </form><br>
+
+    <footer>
+        <p>Copyright © 2022 - Designed by David Díaz<br>
+    </footer>
+
+</html>
