@@ -103,7 +103,7 @@ function createTemplate(){
     var tab = window.open('about:blank', '_blank');
 
     html = '<title>Results - Retrospective Status Page</title><br><strong> Retrospective Status Page Template</strong><br><br>' 
-    + maDate + ", a subset of " + fixedProducts + " customers may have experienced " + getIssue + ". Inmediately after the root cause of the issue was discovered, it was promptly fixed."
+    + maDate + ", a subset of " + fixedProducts + " customers may have experienced " + getIssue + ". Immediately after the root cause of the issue was discovered, it was promptly fixed."
     + '<br><br>We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.' 
     + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.'
 
