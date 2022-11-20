@@ -270,6 +270,7 @@ function createInternal(){
     getCustomerReports = document.getElementById('customerReports').value;
     getSlackChannel = document.getElementById('slackChannel').value;
     getCause = document.getElementById('cause').value;
+    getBeingDone = document.getElementById('beingDone').value;
 
     maDate = "From " + mo + " " + da + ", " + ti + " UTC until " + new_ti + " UTC"
 
@@ -295,7 +296,7 @@ function createInternal(){
     html = '<title>Results - Internal Retrospective Status Page</title><br><strong>Internal Retrospective Status Page Template</strong><br><br>' 
     + getTitle 
     + '<br><br>' + maDate + ", a subset of " + fixedProducts + " customers may have experienced " + getIssue + ". This was identified to have been caused by " + getCause + "."
-    + '<br><br>We continue to actively monitoring the OCI Status Page which still shows service disruptions.'
+    + '<br><br>' + getBeingDone 
     + '<br><br>Customer Reports: ' + getCustomerReports
     + '<br><br>RFO - Upon Request, RFO for external customer communication will be published to the RFO distribution list within 48-72 hours'
     + '<br><br>Postmortem/RCA - A detailed technical doc will be shared in the incident slack channel ' + getSlackChannel
