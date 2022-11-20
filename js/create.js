@@ -1,11 +1,11 @@
-function createTemplate(){
+function createExternal(){
 
     try {
         // This is to get the date and create its format
 
-    var getDate = document.getElementById("dateTime").value;
-    var getMinutes = document.getElementById("duration").value;
-    var getIssue = document.getElementById("issue").value;
+    var getDate = document.getElementById('dateTime').value;
+    var getMinutes = document.getElementById('duration').value;
+    var getIssue = document.getElementById('issue').value;
 
     getMinutes = parseInt(getMinutes);
 
@@ -13,11 +13,11 @@ function createTemplate(){
     currentMonth = date.getMonth();
     date = date.toString();
 
-    splitDate = date.split(" ");
+    splitDate = date.split(' ');
 
     //Splitting the date
 
-    splitWeekDay = splitDate[0].replace(",","");
+    splitWeekDay = splitDate[0].replace(',','');
     splitMonth = splitDate[1];
     splitDay = splitDate[2];
     splitYear = splitDate[3];
@@ -26,7 +26,7 @@ function createTemplate(){
 
     // Let's now divide our time
 
-    finalTime = splitDate[4].split(":");
+    finalTime = splitDate[4].split(':');
     splitHour = finalTime[0];
     splitMinutes = finalTime[1];
     splitMinutesOne = splitMinutes[0];
@@ -49,11 +49,11 @@ function createTemplate(){
     new_currentMonth = new_date.getMonth();
     new_date = new_date.toString();
 
-    new_splitDate = new_date.split(" ");
+    new_splitDate = new_date.split(' ');
 
     //Splitting the date
 
-    new_splitWeekDay = new_splitDate[0].replace(",","");
+    new_splitWeekDay = new_splitDate[0].replace(',','');
     new_splitMonth = new_splitDate[1];
     new_splitDay = new_splitDate[2];
     new_splitYear = new_splitDate[3];
@@ -62,7 +62,7 @@ function createTemplate(){
 
     // Let's now divide our time
 
-    new_finalTime = new_splitDate[4].split(":");
+    new_finalTime = new_splitDate[4].split(':');
     new_splitHour = new_finalTime[0];
     new_splitMinutes = new_finalTime[1];
     new_splitMinutesOne = new_splitMinutes[0];
@@ -89,7 +89,9 @@ function createTemplate(){
 
     fixedProducts = fixProducts(selected);
 
-    maDate = "From " + mo + " " + da + ", " + ti + " UTC until " + new_ti + " UTC"
+    getTitle = document.getElementById('title').value;
+
+    maDate = 'From ' + mo + ' ' + da + ', ' + ti + ' UTC until ' + new_ti + ' UTC'
 
     finalDowntime = timeConverter(getMinutes);
 
@@ -104,7 +106,8 @@ function createTemplate(){
     var tab = window.open('about:blank', '_blank');
 
     html = '<title>Results - External Retrospective Status Page</title><br><strong>Extenal Retrospective Status Page Template</strong><br><br>' 
-    + maDate + ", a subset of " + fixedProducts + " customers may have experienced " + getIssue + ". Immediately after the root cause of the issue was discovered, it was promptly fixed."
+    + getTitle 
+    + '<br><br>' + maDate + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '. Immediately after the root cause of the issue was discovered, it was promptly fixed.'
     + '<br><br>We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.' 
     + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.'
 
@@ -135,13 +138,13 @@ function timeConverter(minutes){
     var rminutes = Math.round(minutes);
 
     if(minutes === 0){
-        return rhours + "-hour";
+        return rhours + '-hour';
     }
     else if(minutes <= 59){
-        return rminutes + "-minute";
+        return rminutes + '-minute';
     }
     else{
-        return rhours + "-hour and " + rminutes + "-minute";
+        return rhours + '-hour and ' + rminutes + '-minute';
     }
 
 }
@@ -149,7 +152,7 @@ function timeConverter(minutes){
 function fixProducts(products){
 
     var listProducts = products;
-    var productsFinal = "";
+    var productsFinal = '';
 
     var penUltProduct = listProducts[listProducts.length -2];
     var lastProduct = listProducts[listProducts.length -1];
@@ -160,13 +163,13 @@ function fixProducts(products){
             productsFinal = listProducts[i];
 
         }else if (listProducts[i] === lastProduct){
-            productsFinal = productsFinal + " and " + listProducts[i];
+            productsFinal = productsFinal + ' and ' + listProducts[i];
 
         }else if (listProducts[i] === penUltProduct) {
             productsFinal = productsFinal + listProducts[i];
 
         }else{
-            productsFinal = productsFinal + listProducts[i] + ", ";
+            productsFinal = productsFinal + listProducts[i] + ', ';
         }
         
     }
@@ -180,9 +183,9 @@ function createInternal(){
     try {
         // This is to get the date and create its format
 
-    var getDate = document.getElementById("dateTime").value;
-    var getMinutes = document.getElementById("duration").value;
-    var getIssue = document.getElementById("issue").value;
+    var getDate = document.getElementById('dateTime').value;
+    var getMinutes = document.getElementById('duration').value;
+    var getIssue = document.getElementById('issue').value;
 
     getMinutes = parseInt(getMinutes);
 
@@ -190,11 +193,11 @@ function createInternal(){
     currentMonth = date.getMonth();
     date = date.toString();
 
-    splitDate = date.split(" ");
+    splitDate = date.split(' ');
 
     //Splitting the date
 
-    splitWeekDay = splitDate[0].replace(",","");
+    splitWeekDay = splitDate[0].replace(',','');
     splitMonth = splitDate[1];
     splitDay = splitDate[2];
     splitYear = splitDate[3];
@@ -203,7 +206,7 @@ function createInternal(){
 
     // Let's now divide our time
 
-    finalTime = splitDate[4].split(":");
+    finalTime = splitDate[4].split(':');
     splitHour = finalTime[0];
     splitMinutes = finalTime[1];
     splitMinutesOne = splitMinutes[0];
@@ -226,11 +229,11 @@ function createInternal(){
     new_currentMonth = new_date.getMonth();
     new_date = new_date.toString();
 
-    new_splitDate = new_date.split(" ");
+    new_splitDate = new_date.split(' ');
 
     //Splitting the date
 
-    new_splitWeekDay = new_splitDate[0].replace(",","");
+    new_splitWeekDay = new_splitDate[0].replace(',','');
     new_splitMonth = new_splitDate[1];
     new_splitDay = new_splitDate[2];
     new_splitYear = new_splitDate[3];
@@ -239,7 +242,7 @@ function createInternal(){
 
     // Let's now divide our time
 
-    new_finalTime = new_splitDate[4].split(":");
+    new_finalTime = new_splitDate[4].split(':');
     new_splitHour = new_finalTime[0];
     new_splitMinutes = new_finalTime[1];
     new_splitMinutesOne = new_splitMinutes[0];
@@ -272,7 +275,7 @@ function createInternal(){
     getCause = document.getElementById('cause').value;
     getBeingDone = document.getElementById('beingDone').value;
 
-    maDate = "From " + mo + " " + da + ", " + ti + " UTC until " + new_ti + " UTC"
+    maDate = 'From ' + mo + ' ' + da + ', ' + ti + ' UTC until ' + new_ti + ' UTC'
 
     finalDowntime = timeConverter(getMinutes);
 
@@ -295,7 +298,7 @@ function createInternal(){
     var tab = window.open('about:blank', '_blank');
     html = '<title>Results - Internal Retrospective Status Page</title><br><strong>Internal Retrospective Status Page Template</strong><br><br>' 
     + getTitle 
-    + '<br><br>' + maDate + ", a subset of " + fixedProducts + " customers may have experienced " + getIssue + ". This was identified to have been caused by " + getCause + "."
+    + '<br><br>' + maDate + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '. This was identified to have been caused by ' + getCause + '.'
     + '<br><br>' + getBeingDone 
     + '<br><br>Customer Reports: ' + getCustomerReports
     + '<br><br>RFO - Upon Request, RFO for external customer communication will be published to the RFO distribution list within 48-72 hours'
