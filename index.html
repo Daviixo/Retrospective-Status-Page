@@ -36,7 +36,7 @@
         <div>
 
             <div class="center">
-                <h2>NOC | Retro SP Template</h2>
+                <h2>External: Retro SP Template</h2>
                 <select onchange="location = this.options[this.selectedIndex].value;">
                     <option value="#">GoTo Another Template</option>
                     <option value="https://daviixo.github.io/IncidentsTemplate/">Incidents Template</option>
@@ -45,6 +45,13 @@
                     <option value="https://daviixo.github.io/CAB-External-MA/">CAB - External MA</option>
                 </select>
             </div><br>
+
+            <div class="mb-3 row">
+                <label for="inputCallerEmail" class="col-sm-10 col-form-label"><strong>Title</strong></label>
+                <div class="col-sm-13">
+                    <input type="text" id="title" rows="1" cols="30" wrap="soft" class="form-control">
+                </div>
+            </div>
 
             <label for="products"><strong>Choose your products:</strong></label><br>
 
@@ -110,9 +117,38 @@
 
         <button type="button" class="btn btn-danger" onclick="location.reload();">
             Reset
-        </button>
+        </button><br><br>
+
+        <div class="center">
+            <h2>Internal: Retro SP Template</h2>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="inputCallerEmail" class="col-sm-10 col-form-label"><strong>Customer Reports</strong></label>
+            <div class="col-sm-13">
+                <input type="text" id="customerReports" rows="1" cols="30" wrap="soft" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="inputCallerEmail" class="col-sm-10 col-form-label"><strong>Slack Channel</strong></label>
+            <div class="col-sm-13">
+                <input type="text" id="slackChannel" rows="1" cols="30" wrap="soft" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="inputCallerEmail" class="col-sm-10 col-form-label"><strong>What was the cause?</strong></label>
+            <p style="font-size:11px">"This was identified to have been caused by..."</p>
+            <div class="col-sm-13">
+                <input type="text" id="cause" rows="1" cols="30" wrap="soft" class="form-control">
+            </div>
+        </div> 
 
         <br>
+
+        <button type="button" class="btn btn-success" value="Copy" id="copy" onclick="createInternal();">Create
+            Template </button><br><br>
 
     </form><br>
 
