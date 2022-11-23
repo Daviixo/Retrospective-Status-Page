@@ -95,6 +95,8 @@ function createExternal(){
 
     finalDowntime = timeConverter(getMinutes);
 
+    console.log('Final down time: ' + finalDowntime);
+
     /* The template to be used is the following:
 
     From 09/30/2022, 00:23 UTC until 01:20 UTC, a subset of GoTo Connect customers may have experienced outbound call failures to some PSTN destinations. Immediately after the root cause of the issue was discovered, it was promptly fixed.  
@@ -130,6 +132,8 @@ function addHours(change_date, addMinutes){
 }
 
 function timeConverter(minutes){
+
+    console.log('Adding minutes')
 
     var num = minutes;
     var hours = (num / 60);
