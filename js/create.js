@@ -1,3 +1,20 @@
+let createAllTemplates = () => {
+
+    console.log("Creating templates!")
+
+    internalhtml = createExternal();
+    externalhtml = createInternal();
+
+    var tab = window.open('about:blank', '_blank');
+
+    tab.document.write(internalhtml);
+    //tab.document.close();
+
+    tab.document.write(externalhtml);
+    tab.document.close();
+
+}
+
 function createExternal(){
 
     try {
@@ -91,6 +108,11 @@ function createExternal(){
 
     getTitle = document.getElementById('title').value;
 
+    var e = document.getElementById("incidentType");
+    var cIncidentType = e.value;
+
+    newTitle = capitalizeFirstLetter(getTitle);
+
     maDate = 'From ' + mo + ' ' + da + ', ' + ti + ' UTC until ' + new_ti + ' UTC'
 
     finalDowntime = timeConverter(getMinutes);
@@ -99,6 +121,8 @@ function createExternal(){
 
     /* The template to be used is the following:
 
+    Title: SEVERITY - PRODUCT - ISSUE
+
     From MONTH DD, 00:00 AM/PM UTC until 00:00 AM/PM UTC, a subset of PRODUCT customers may have experienced ISSUE. 
     Immediately after the root cause of the issue was discovered, it was promptly fixed.
 
@@ -106,22 +130,28 @@ function createExternal(){
 
     We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.*/
 
-    var tab = window.open('about:blank', '_blank');
+    //var tab = window.open('about:blank', '_blank');
 
-    html = '<title>Results - External Retrospective Status Page</title><br><strong>Extenal Retrospective Status Page Template</strong><br><br>' 
-    + getTitle 
+    html = '<title>Results - Retrospective Status Pages</title><br><strong>Extenal Retrospective Status Page Template</strong><br><br>' 
+    + 'Title: ' + cIncidentType + ' - ' + fixedProducts + ' - ' + getTitle 
     + '<br><br>' + maDate + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '. Immediately after the root cause of the issue was discovered, it was promptly fixed.'
     + '<br><br>We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.' 
-    + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.'
+    + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.<br><br>'
 
-    tab.document.write(html);
-    tab.document.close();
+    //tab.document.write(html);
+    //tab.document.close();
 
     } catch (error) {
         console.log('Error: ' + error)
         alert('Please make sure all fields are filled up :D')
     }
+
+    return html;
     
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function addHours(change_date, addMinutes){
@@ -186,6 +216,7 @@ function fixProducts(products){
 function createInternal(){
 
     try {
+    
         // This is to get the date and create its format
 
     var getDate = document.getElementById('dateTime').value;
@@ -275,6 +306,10 @@ function createInternal(){
     fixedProducts = fixProducts(selected);
 
     getTitle = document.getElementById('title').value;
+
+    var e = document.getElementById("incidentType");
+    var cIncidentType = e.value;
+
     getCustomerReports = document.getElementById('customerReports').value;
     getSlackChannel = document.getElementById('slackChannel').value;
     getCause = document.getElementById('cause').value;
@@ -298,9 +333,10 @@ function createInternal(){
 
     */
 
-    var tab = window.open('about:blank', '_blank');
-    html = '<title>Results - Internal Retrospective Status Page</title><br><strong>Internal Retrospective Status Page Template</strong><br><br>' 
-    + getTitle 
+    //var tab = window.open('about:blank', '_blank');
+
+    html = '<title>Results - Internal Retrospective Status Page</title><br><br><strong>Internal Retrospective Status Page Template</strong><br><br>' 
+    + 'Title: ' + cIncidentType + ' - ' + fixedProducts + ' - ' + getTitle
     + '<br><br>' + maDate + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '.'
     + ' This incident has been already resolved and we have confirmed that all systems are 100% operational.'
     + '<br><br><b>Final Customer Reports - </b>' + getCustomerReports
@@ -308,12 +344,14 @@ function createInternal(){
     + '<br><br><b>Resolution - </b>' + getSolution
     + '<br><br><b>Postmortem</b> - A detailed technical document will be shared in the incident slack channel ' + getSlackChannel;
 
-    tab.document.write(html);
-    tab.document.close();
+    //tab.document.write(html);
+    //tab.document.close();
 
     } catch (error) {
         console.log('Error: ' + error)
         alert('Please make sure all fields are filled up :D')
     }
+
+    return html;
 
 }

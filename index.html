@@ -53,6 +53,14 @@
                 </div>
             </div>
 
+            <label><strong>Severity</strong></label>
+
+            <select id="incidentType">
+                <option value="P2">P2</option>
+                <option value="P1">P1</option>
+                <option value="P3">P3</option>
+            </select><br><br>
+
             <label for="products"><strong>Choose your products:</strong></label><br>
 
             <select id="products" class="form-select form-select-lg mb-3" multiple aria-label=".form-select-lg example">
@@ -111,12 +119,12 @@
 
         </div>
 
-        <button type="button" class="btn btn-success" onclick="createExternal();">Create Templates </button><br><br>
+        <!-- <button type="button" class="btn btn-success" onclick="createExternal();">Create Templates </button><br><br>
 
 
         <button type="button" class="btn btn-danger" onclick="location.reload();">
             Reset
-        </button><br><br>
+        </button><br><br> -->
 
         <div class="center">
             <h2>Internal: Retro SP Template</h2>
@@ -139,7 +147,6 @@
 
         <div class="mb-3 row">
             <label for="inputCallerEmail" class="col-sm-10 col-form-label"><strong>What was the cause?</strong></label>
-            <p style="font-size:11px">"This was identified to have been caused by..."</p>
             <div class="col-sm-13">
                 <input type="text" id="cause" rows="1" cols="30" wrap="soft" class="form-control">
             </div>
@@ -154,7 +161,7 @@
 
         <br>
 
-        <button type="button" class="btn btn-success" onclick="createInternal();">Create Template </button><br><br>
+        <button type="button" class="btn btn-success" onclick="createAllTemplates();">Create Templates </button><br><br>
 
     </form><br>
 
