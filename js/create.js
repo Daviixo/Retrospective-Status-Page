@@ -99,11 +99,12 @@ function createExternal(){
 
     /* The template to be used is the following:
 
-    From 09/30/2022, 00:23 UTC until 01:20 UTC, a subset of GoTo Connect customers may have experienced outbound call failures to some PSTN destinations. Immediately after the root cause of the issue was discovered, it was promptly fixed.  
+    From MONTH DD, 00:00 AM/PM UTC until 00:00 AM/PM UTC, a subset of PRODUCT customers may have experienced ISSUE. 
+    Immediately after the root cause of the issue was discovered, it was promptly fixed.
 
     We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.
 
-    We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence. */
+    We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.*/
 
     var tab = window.open('about:blank', '_blank');
 
@@ -277,7 +278,7 @@ function createInternal(){
     getCustomerReports = document.getElementById('customerReports').value;
     getSlackChannel = document.getElementById('slackChannel').value;
     getCause = document.getElementById('cause').value;
-    getBeingDone = document.getElementById('beingDone').value;
+    getSolution = document.getElementById('solution').value;
 
     maDate = 'From ' + mo + ' ' + da + ', ' + ti + ' UTC until ' + new_ti + ' UTC'
 
@@ -285,28 +286,27 @@ function createInternal(){
 
     /*
     
-    P2 - G2M - Unable to Share Cameras
+    From MONTH DD, 00:00 AM/PM UTC until 00:00 AM/PM UTC, a subset of PRODUCT customers may have experienced ISSUE.  This incident has been already resolved and we have confirmed that all systems are 100% operational.
 
-    From November 16, 3:08 PM UTC until 4:42 PM UTC, a subset of GoTo Meeting customers may have experienced issues when sharing their cameras. This was identified to have been caused by an outage with one of our Cloud providers (OCI). To mitigate the issue, the GoTo engineers moved VCS and VGW services to AWS, MCS services were off-lined in EVA and moved to another OCI site.
+    Final Customer reports - #OF REPORTS SO FAR
 
-    We continue to actively monitoring the OCI Status Page which still shows service disruptions.
+    Root Cause - Our engineers identified the issue as being caused by CAUSE
 
-    Customer Reports: 2
+    Resolution -  To mitigate the issue engineers MITIGATION ACTIONS
 
-    RFO - Upon Request, RFO for external customer communication will be published to the RFO distribution list within 48-72 hours
+    Postmortem - A detailed technical document will be shared in the incident slack channel
 
-    Postmortem/RCA - A detailed technical doc will be shared in the incident slack channel #inc_20221116_eva_network_issues
-    
     */
 
     var tab = window.open('about:blank', '_blank');
     html = '<title>Results - Internal Retrospective Status Page</title><br><strong>Internal Retrospective Status Page Template</strong><br><br>' 
     + getTitle 
-    + '<br><br>' + maDate + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '. This was identified to have been caused by ' + getCause + '.'
-    + '<br><br>' + getBeingDone 
-    + '<br><br>Customer Reports: ' + getCustomerReports
-    + '<br><br>RFO - Upon Request, RFO for external customer communication will be published to the RFO distribution list within 48-72 hours'
-    + '<br><br>Postmortem/RCA - A detailed technical doc will be shared in the incident slack channel ' + getSlackChannel
+    + '<br><br>' + maDate + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '.'
+    + ' This incident has been already resolved and we have confirmed that all systems are 100% operational.'
+    + '<br><br><b>Final Customer Reports - </b>' + getCustomerReports
+    + '<br><br><b>Root Cause - </b>' + getCause
+    + '<br><br><b>Resolution - </b>' + getSolution
+    + '<br><br><b>Postmortem</b> - A detailed technical document will be shared in the incident slack channel ' + getSlackChannel;
 
     tab.document.write(html);
     tab.document.close();
