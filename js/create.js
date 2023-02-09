@@ -2,12 +2,12 @@ let createAllTemplates = () => {
 
     console.log("Creating templates!")
 
-    //internalhtml = createInternal();
+    internalhtml = createInternal();
     externalhtml = createExternal();
 
     var tab = window.open('about:blank', '_blank');
 
-    //tab.document.write(internalhtml);
+    tab.document.write(internalhtml);
     //tab.document.close();
 
     tab.document.write(externalhtml);
@@ -36,7 +36,6 @@ let convertToUTC = (date) => {
 let createExternal = () => {
 
     try {
-        // This is to get the date and create its format
 
     var getDate = document.getElementById('dateTime').value;
     var getMinutes = document.getElementById('duration').value;
@@ -155,7 +154,94 @@ let fixProducts = (products) => {
 
 }
 
-function createInternal(){
+let createInternal = () => {
+
+    try {
+
+        var getDate = document.getElementById('dateTime').value;
+        var getMinutes = document.getElementById('duration').value;
+        var getIssue = document.getElementById('issue').value;
+        var getCustomerReports = document.getElementById('customerReports').value;
+        var getSlackChannel = document.getElementById('slackChannel').value;
+        var getCause = document.getElementById('cause').value;
+        var getSolution = document.getElementById('solution').value;
+    
+        getMinutes = parseInt(getMinutes);
+    
+        // Output should be:
+        // MONTH DD, 00:00 AM/PM UTC
+    
+        utcNewDate = convertToUTC(getDate);
+    
+        console.log("UTC New Date var: " + utcNewDate);
+    
+        // Example: UTC New Date var: Feb 09, 7:07 PM UTC
+    
+        endTime = addHours(utcNewDate, getMinutes);
+    
+        console.log('Endtime: ' + endTime);
+    
+        // Example: Endtime: 7:29 PM UTC
+    
+        var selected = [];
+        for (var option of document.getElementById('products').options)
+        {
+            if (option.selected) {
+                selected.push(option.value);
+            }
+        } 
+    
+        // Let's fix our product's list
+    
+        fixedProducts = fixProducts(selected);
+    
+        getTitle = document.getElementById('title').value;
+    
+        var e = document.getElementById("incidentType");
+        var cIncidentType = e.value;
+    
+        newTitle = capitalizeFirstLetter(getTitle);
+    
+        /* 
+        
+        Title: SEVERITY - PRODUCT - ISSUE
+
+        From MONTH DD, 00:00 AM/PM UTC until 00:00 AM/PM UTC, a subset of PRODUCT customers may have experienced ISSUE.  This incident has been already resolved and we have confirmed that all systems are 100% operational.
+
+        Final Customer reports - #OF REPORTS SO FAR
+
+        Root Cause - Our engineers identified the issue as being caused by CAUSE
+
+        Resolution -  To mitigate the issue engineers MITIGATION ACTIONS
+
+        Slack Channel - CHANNEL NAME
+
+        Postmortem - A detailed technical document will be shared in the incident slack channel
+         
+        */
+    
+        html = '<title>Results - Retrospective Status Pages</title>' 
+        + '<h1>Internal Retrospective Status Page Template</h1>' 
+        + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + getTitle 
+        + '<br><br>' + 'From ' + utcNewDate + ' until ' + endTime + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue 
+        + '. This incident has been already resolved and we have confirmed that all systems are 100% operational.'
+
+        + '<br><br>&lt;b&gt;Final Customer Reports&lt;/b&gt - ' + getCustomerReports
+        + '<br><br>&lt;b&gt;Root Cause&lt;/b&gt - ' + getCause
+        + '<br><br>&lt;b&gt;Resolution&lt;/b&gt - To mitigate the issue GoTo engineers ' + getSolution
+        + '<br><br>&lt;b&gt;Slack Channel&lt;/b&gt - ' + getSlackChannel
+        + '<br><br>&lt;b&gt;Postmortem&lt;/b&gt -  A detailed technical document will be shared in the incident slack channel'
+    
+        } catch (error) {
+            console.log('Error: ' + error)
+            alert('Please make sure all fields are filled up :D')
+        }
+    
+        return html;
+
+}
+
+function createInternalOld(){
 
     try {
     
