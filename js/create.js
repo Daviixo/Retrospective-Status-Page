@@ -102,6 +102,18 @@ function createExternal(){
         }
     }
 
+    var getDate = document.getElementById('dateTime').value;
+    var date = new Date(getDate);
+    var formattedDate = date.toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+    });
+
+    console.log('UTC date/time: ' + formattedDate);
+
     // Let's fix our list
 
     fixedProducts = fixProducts(selected);
