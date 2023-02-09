@@ -93,7 +93,7 @@ let createExternal = () => {
 
     html = '<title>Results - Retrospective Status Pages</title>' 
     + '<h1>Extenal Retrospective Status Page Template</h1>' 
-    + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + getTitle 
+    + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + newTitle 
     + '<br><br>' + 'From ' + utcNewDate + ' until ' + endTime + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '. Immediately after the root cause of the issue was discovered, it was promptly fixed.'
     + '<br><br>We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.' 
     + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.<br><br>'
@@ -222,7 +222,7 @@ let createInternal = () => {
     
         html = '<title>Results - Retrospective Status Pages</title>' 
         + '<h1>Internal Retrospective Status Page Template</h1>' 
-        + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + getTitle 
+        + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + newTitle 
         + '<br><br>' + 'From ' + utcNewDate + ' until ' + endTime + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue 
         + '. This incident has been already resolved and we have confirmed that all systems are 100% operational.'
 
@@ -364,7 +364,7 @@ function createInternalOld(){
     //var tab = window.open('about:blank', '_blank');
 
     html = '<title>Results - Internal Retrospective Status Page</title><br><br><strong>Internal Retrospective Status Page Template</strong><br><br>' 
-    + 'Title: ' + cIncidentType + ' - ' + fixedProducts + ' - ' + getTitle
+    + 'Title: ' + cIncidentType + ' - ' + fixedProducts + ' - ' + newTitle
     + '<br><br>' + maDate + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '.'
     + ' This incident has been already resolved and we have confirmed that all systems are 100% operational.'
     + '<br><br><b>Final Customer Reports - </b>' + getCustomerReports
