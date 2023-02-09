@@ -7,17 +7,19 @@ let createAllTemplates = () => {
 
     var tab = window.open('about:blank', '_blank');
 
-    tab.document.write(internalhtml);
+    tab.document.write(externalhtml);
     //tab.document.close();
 
-    tab.document.write(externalhtml);
+    tab.document.write(internalhtml);
     tab.document.close();
 
 }
 
 let convertToUTC = (date) => {
 
-    date = new Date();
+    console.log("Under convert to UTC\nDate: " + date);
+
+    date = new Date(date);
 
     let utcDate = new Date(date.toUTCString());
 
@@ -40,6 +42,8 @@ let createExternal = () => {
     var getDate = document.getElementById('dateTime').value;
     var getMinutes = document.getElementById('duration').value;
     var getIssue = document.getElementById('issue').value;
+
+    console.log("This is getDate: " + getDate);
 
     getMinutes = parseInt(getMinutes);
 
@@ -383,3 +387,5 @@ function createInternalOld(){
     return html;
 
 }
+
+// External > Internal > Comms > Outages
