@@ -2,12 +2,12 @@ let createAllTemplates = () => {
 
     console.log("Creating templates!")
 
-    internalhtml = createExternal();
-    externalhtml = createInternal();
+    //internalhtml = createInternal();
+    externalhtml = createExternal();
 
     var tab = window.open('about:blank', '_blank');
 
-    tab.document.write(internalhtml);
+    //tab.document.write(internalhtml);
     //tab.document.close();
 
     tab.document.write(externalhtml);
@@ -15,7 +15,25 @@ let createAllTemplates = () => {
 
 }
 
-function createExternal(){
+let convertToUTC = (date) => {
+
+    date = new Date();
+
+    let utcDate = new Date(date.toUTCString());
+
+    return utcDate.toLocaleString("en-US", {
+        timeZone: "UTC",
+        month: "short",
+        day: "2-digit",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+        timeZoneName: "short"
+    });
+
+}
+
+let createExternal = () => {
 
     try {
         // This is to get the date and create its format
@@ -26,73 +44,20 @@ function createExternal(){
 
     getMinutes = parseInt(getMinutes);
 
-    var date = new Date(getDate);
-    currentMonth = date.getMonth();
-    date = date.toString();
+    // Output should be:
+    // MONTH DD, 00:00 AM/PM UTC
 
-    splitDate = date.split(' ');
+    utcNewDate = convertToUTC(getDate);
 
-    //Splitting the date
+    console.log("UTC New Date var: " + utcNewDate);
 
-    splitWeekDay = splitDate[0].replace(',','');
-    splitMonth = splitDate[1];
-    splitDay = splitDate[2];
-    splitYear = splitDate[3];
-    splitTime = splitDate[4];
-    splitTimezone = splitDate[5];
+    // Example: UTC New Date var: Feb 09, 7:07 PM UTC
 
-    // Let's now divide our time
+    endTime = addHours(utcNewDate, getMinutes);
 
-    finalTime = splitDate[4].split(':');
-    splitHour = finalTime[0];
-    splitMinutes = finalTime[1];
-    splitMinutesOne = splitMinutes[0];
-    splitMinutesTwo = splitMinutes[1];
+    console.log('Endtime: ' + endTime);
 
-    finalSplitMinutes = splitMinutesOne + splitMinutesTwo;
-
-    var d = new Date(splitYear,currentMonth,splitDay,splitHour,finalSplitMinutes);
-    var ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    var mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
-    var da = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(d);
-    var wd = new Intl.DateTimeFormat('en', { weekday: 'long' }).format(d);
-    var ti = new Intl.DateTimeFormat('en', { hour: 'numeric', hour12: true, minute: '2-digit'}).format(d);
-
-    // Let's now add the minutes to the current date.
-
-    createNewDate = addHours(d,getMinutes);
-
-    var new_date = new Date(createNewDate);
-    new_currentMonth = new_date.getMonth();
-    new_date = new_date.toString();
-
-    new_splitDate = new_date.split(' ');
-
-    //Splitting the date
-
-    new_splitWeekDay = new_splitDate[0].replace(',','');
-    new_splitMonth = new_splitDate[1];
-    new_splitDay = new_splitDate[2];
-    new_splitYear = new_splitDate[3];
-    new_splitTime = new_splitDate[4];
-    new_splitTimezone = new_splitDate[5];
-
-    // Let's now divide our time
-
-    new_finalTime = new_splitDate[4].split(':');
-    new_splitHour = new_finalTime[0];
-    new_splitMinutes = new_finalTime[1];
-    new_splitMinutesOne = new_splitMinutes[0];
-    new_splitMinutesTwo = new_splitMinutes[1];
-
-    new_finalSplitMinutes = new_splitMinutesOne + new_splitMinutesTwo;
-
-    var new_d = new Date(new_splitYear,currentMonth,new_splitDay,new_splitHour,new_finalSplitMinutes);
-    var new_ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(new_d);
-    var new_mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(new_d);
-    var new_da = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(new_d);
-    var new_wd = new Intl.DateTimeFormat('en', { weekday: 'long' }).format(new_d);
-    var new_ti = new Intl.DateTimeFormat('en', { hour: 'numeric', hour12: true, minute: '2-digit'}).format(new_d);
+    // Example: Endtime: 7:29 PM UTC
 
     var selected = [];
     for (var option of document.getElementById('products').options)
@@ -100,21 +65,9 @@ function createExternal(){
         if (option.selected) {
             selected.push(option.value);
         }
-    }
+    } 
 
-    var getDate = document.getElementById('dateTime').value;
-    var date = new Date(getDate);
-    var formattedDate = date.toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true
-    });
-
-    console.log('UTC date/time: ' + formattedDate);
-
-    // Let's fix our list
+    // Let's fix our product's list
 
     fixedProducts = fixProducts(selected);
 
@@ -125,33 +78,26 @@ function createExternal(){
 
     newTitle = capitalizeFirstLetter(getTitle);
 
-    maDate = 'From ' + mo + ' ' + da + ', ' + ti + ' UTC until ' + new_ti + ' UTC'
+    /* 
+    
+    Final output should look like:
 
-    finalDowntime = timeConverter(getMinutes);
+    Title: PRODUCT - ISSUE
 
-    console.log('Final down time: ' + finalDowntime);
-
-    /* The template to be used is the following:
-
-    Title: SEVERITY - PRODUCT - ISSUE
-
-    From MONTH DD, 00:00 AM/PM UTC until 00:00 AM/PM UTC, a subset of PRODUCT customers may have experienced ISSUE. 
-    Immediately after the root cause of the issue was discovered, it was promptly fixed.
+    From MONTH DD, 00:00 AM/PM UTC until 00:00 AM/PM UTC, a subset of PRODUCT customers may have experienced ISSUE. Immediately after the root cause of the issue was discovered, it was promptly fixed.
 
     We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.
 
-    We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.*/
+    We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.
+        
+    */
 
-    //var tab = window.open('about:blank', '_blank');
-
-    html = '<title>Results - Retrospective Status Pages</title><br><strong>Extenal Retrospective Status Page Template</strong><br><br>' 
-    + 'Title: ' + cIncidentType + ' - ' + fixedProducts + ' - ' + getTitle 
-    + '<br><br>' + maDate + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '. Immediately after the root cause of the issue was discovered, it was promptly fixed.'
+    html = '<title>Results - Retrospective Status Pages</title>' 
+    + '<h1>Extenal Retrospective Status Page Template</h1>' 
+    + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + getTitle 
+    + '<br><br>' + 'From ' + utcNewDate + ' until ' + endTime + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '. Immediately after the root cause of the issue was discovered, it was promptly fixed.'
     + '<br><br>We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.' 
     + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.<br><br>'
-
-    //tab.document.write(html);
-    //tab.document.close();
 
     } catch (error) {
         console.log('Error: ' + error)
@@ -162,41 +108,25 @@ function createExternal(){
     
 }
 
-function capitalizeFirstLetter(string) {
+let capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function addHours(change_date, addMinutes){
+let addHours = (change_date, addMinutes) => {
 
     var newDate = new Date(change_date);
     newDate.setMinutes(newDate.getMinutes() + addMinutes);
-    return newDate;
 
+    return newDate.toLocaleString("en-US", {
+        timeZone: "UTC",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+        timeZoneName: "short"
+    });
 }
 
-function timeConverter(minutes){
-
-    console.log('Adding minutes')
-
-    var num = minutes;
-    var hours = (num / 60);
-    var rhours = Math.floor(hours);
-    var minutes = (hours - rhours) * 60;
-    var rminutes = Math.round(minutes);
-
-    if(minutes === 0){
-        return rhours + '-hour';
-    }
-    else if(minutes <= 59){
-        return rminutes + '-minute';
-    }
-    else{
-        return rhours + '-hour and ' + rminutes + '-minute';
-    }
-
-}
-
-function fixProducts(products){
+let fixProducts = (products) => {
 
     var listProducts = products;
     var productsFinal = '';

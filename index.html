@@ -36,7 +36,7 @@
         <div>
 
             <div class="center">
-                <h2>External: Retro SP Template</h2>
+                <h2>Retrospectite Status Pages</h2>
                 <select onchange="location = this.options[this.selectedIndex].value;">
                     <option value="#">GoTo Another Template</option>
                     <option value="https://daviixo.github.io/IncidentsTemplate/">Incidents Template</option>
@@ -98,21 +98,22 @@
                 <option value='GoTo Contact Center'>GoTo Contact Center</option>
             </select>
 
-            <div class="table-responsive"><label><strong>Date/Time (UTC)</strong></label></div>
+            <div class="table-responsive"><label><strong>Date/Time</strong></label></div>
+            <p style="font-size:11px">FYI: This will convert the Date/Time to UTC</p>
             
             <div class="">
                     <input type="datetime-local" id="dateTime" class="form-control" value="" />
-            </div>
+            </div><br>
 
             <div class="mb-1 row">
                 <label for="duration" class="col-sm-10 col-form-label"><strong>Duration (in minutes)</strong></label>
                 <div class="col-sm-3">
-                    <input type="text" id="duration" rows="1" cols="30" wrap="soft" class="form-control">
+                    <input type="number" id="duration" rows="1" cols="30" wrap="soft" class="form-control">
                 </div>
-            </div>
+            </div><br>
 
             <div class="form-group">
-                <label for="expect">Issue?</label>
+                <label for="expect"><b>Issue?</b></label>
                 <p style="font-size:11px">"... a subset of [PRODUCT] customers experienced..."<br>"Don't use a period (' . ') at the end of your sentence."</p>
                 <textarea class="form-control" id="issue" rows="5"></textarea>
             </div><br>
@@ -125,11 +126,6 @@
         <button type="button" class="btn btn-danger" onclick="location.reload();">
             Reset
         </button><br><br> -->
-
-        <div class="center">
-            <h2>Internal: Retro SP Template</h2>
-            <h5>Please remember to fill all fields from above (External)</h5>
-        </div>
 
         <div class="mb-3 row">
             <label for="inputCallerEmail" class="col-sm-10 col-form-label"><strong>Customer Reports</strong></label>
