@@ -1,6 +1,6 @@
 let createAllTemplates = () => {
 
-    console.log("Creating templates!")
+    //console.log("Creating templates!")
 
     internalhtml = createInternal();
     externalhtml = createExternal();
@@ -17,7 +17,7 @@ let createAllTemplates = () => {
 
 let convertToUTC = (date) => {
 
-    console.log("Under convert to UTC\nDate: " + date);
+    //console.log("Under convert to UTC\nDate: " + date);
 
     date = new Date(date);
 
@@ -42,6 +42,10 @@ let createExternal = () => {
     var getDate = document.getElementById('dateTime').value;
     var getMinutes = document.getElementById('duration').value;
     var getIssue = document.getElementById('issue').value;
+    var getCustomerReports = document.getElementById('customerReports').value;
+    var getCause = document.getElementById('cause').value;
+    var getSolution = document.getElementById('solution').value;
+    var getSlackChannel = document.getElementById('slackChannel').value;
 
     console.log("This is getDate: " + getDate);
 
@@ -52,13 +56,13 @@ let createExternal = () => {
 
     utcNewDate = convertToUTC(getDate);
 
-    console.log("UTC New Date var: " + utcNewDate);
+    //console.log("UTC New Date var: " + utcNewDate);
 
     // Example: UTC New Date var: Feb 09, 7:07 PM UTC
 
     endTime = addHours(utcNewDate, getMinutes);
 
-    console.log('Endtime: ' + endTime);
+    //console.log('Endtime: ' + endTime);
 
     // Example: Endtime: 7:29 PM UTC
 
@@ -92,7 +96,20 @@ let createExternal = () => {
     We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.
 
     We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.
-        
+    
+    COMMS
+
+    @here
+    We had a SEVERITY for PRODUCTS. This incident has been already resolved.
+
+    Timeline - from START-TIME to END-TIME
+    Customer Impact - ISSUE
+    Final Customer reports - #OF REPORTS SO FAR
+    Root Cause - Our engineers identified the issue as being caused by CAUSE
+    Resolution -  To mitigate the issue engineers MITIGATION ACTIONS
+    Slack Channel - CHANNEL NAME
+    Postmortem - A detailed technical document will be shared in the incident slack channel
+
     */
 
     html = '<title>Results - Retrospective Status Pages</title>' 
@@ -100,7 +117,7 @@ let createExternal = () => {
     + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + newTitle 
     + '<br><br>' + 'From ' + utcNewDate + ' until ' + endTime + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '. Immediately after the root cause of the issue was discovered, it was promptly fixed.'
     + '<br><br>We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.' 
-    + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.<br><br>'
+    + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.<br><br>';
 
     } catch (error) {
         console.log('Error: ' + error)
@@ -177,13 +194,13 @@ let createInternal = () => {
     
         utcNewDate = convertToUTC(getDate);
     
-        console.log("UTC New Date var: " + utcNewDate);
+        //console.log("UTC New Date var: " + utcNewDate);
     
         // Example: UTC New Date var: Feb 09, 7:07 PM UTC
     
         endTime = addHours(utcNewDate, getMinutes);
     
-        console.log('Endtime: ' + endTime);
+        //console.log('Endtime: ' + endTime);
     
         // Example: Endtime: 7:29 PM UTC
     
@@ -229,12 +246,29 @@ let createInternal = () => {
         + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + newTitle 
         + '<br><br>' + 'From ' + utcNewDate + ' until ' + endTime + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue 
         + '. This incident has been already resolved and we have confirmed that all systems are 100% operational.'
+        + '<br><br>&lt;b&gt;Final Customer Reports - &lt;/b&gt ' + getCustomerReports
+        + '<br><br>&lt;b&gt;Root Cause - &lt;/b&gt' + getCause
+        + '<br><br>&lt;b&gt;Resolution - &lt;/b&gtTo mitigate the issue GoTo engineers ' + getSolution
+        + '<br><br>&lt;b&gt;Slack Channel - &lt;/b&gt ' + getSlackChannel
+        + '<br><br>&lt;b&gt;Postmortem - &lt;/b&gtA detailed technical document will be shared in the incident slack channel'
 
-        + '<br><br>&lt;b&gt;Final Customer Reports&lt;/b&gt - ' + getCustomerReports
-        + '<br><br>&lt;b&gt;Root Cause&lt;/b&gt - ' + getCause
-        + '<br><br>&lt;b&gt;Resolution&lt;/b&gt - To mitigate the issue GoTo engineers ' + getSolution
-        + '<br><br>&lt;b&gt;Slack Channel&lt;/b&gt - ' + getSlackChannel
-        + '<br><br>&lt;b&gt;Postmortem&lt;/b&gt -  A detailed technical document will be shared in the incident slack channel'
+        // This section is specfically for the Comms Response Slack Channel
+
+        + '<br><h1>comms_response Channel - Retrospective</h1>'
+        + '@here'
+        + '<br>We had a ' + cIncidentType + ' for ' + fixedProducts + '. This incident has been already resolved.'
+        + '<br><b>Timeline - </b>' + 'From ' + utcNewDate + ' to ' + endTime
+        + '<br><b>Customer Impact - </b>' + newTitle
+        + '<br><b>Final Customer Reports - </b>' + getCustomerReports
+        + '<br><b>Root Cause - </b>' + 'Our engineers identified the issue as being cause by ' + getCause
+        + '<br><b>Resolution - </b>' + getSolution
+        + '<br><b>Slack Channel - </b>' + getSlackChannel
+        + '<br><b>Postmortem -</b> A detailed technical document will be shared in the incident slack channel'
+
+        // This section is for the Outages GoTo Slack Channel
+
+        + '<h1>outages_goto Channel</h1>'
+        + 'Already resolved - ' + cIncidentType + ' - ' + fixedProducts + ' - ' + newTitle + ' - ' + getSlackChannel;
     
         } catch (error) {
             console.log('Error: ' + error)
