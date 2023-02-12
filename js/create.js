@@ -117,7 +117,7 @@ let createExternal = () => {
     + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + newTitle 
     + '<br><br>' + 'From ' + utcNewDate + ' until ' + endTime + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue + '. Immediately after the root cause of the issue was discovered, it was promptly fixed.'
     + '<br><br>We have confirmed that the issue has been resolved completely and all systems are 100% operational at this time.' 
-    + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.<br><br>';
+    + '<br><br>We will conduct an internal investigation of this issue and make appropriate improvements to our systems to help prevent or minimize future recurrence.';
 
     } catch (error) {
         console.log('Error: ' + error)
@@ -130,6 +130,11 @@ let createExternal = () => {
 
 let capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+let makeLowerCase = (string) => {
+    return string.toLowerCase();
+   
 }
 
 let addHours = (change_date, addMinutes) => {
@@ -186,6 +191,10 @@ let createInternal = () => {
         var getSlackChannel = document.getElementById('slackChannel').value;
         var getCause = document.getElementById('cause').value;
         var getSolution = document.getElementById('solution').value;
+
+        var getSolutionLowerCase = makeLowerCase(getSolution);
+
+        var getCauseLowerCase = makeLowerCase(getCause);
     
         getMinutes = parseInt(getMinutes);
     
@@ -246,22 +255,22 @@ let createInternal = () => {
         + '<b>Title:</b> ' + cIncidentType + ' - ' + fixedProducts + ' - ' + newTitle 
         + '<br><br>' + 'From ' + utcNewDate + ' until ' + endTime + ', a subset of ' + fixedProducts + ' customers may have experienced ' + getIssue 
         + '. This incident has been already resolved and we have confirmed that all systems are 100% operational.'
-        + '<br><br>&lt;b&gt;Final Customer Reports - &lt;/b&gt ' + getCustomerReports
-        + '<br><br>&lt;b&gt;Root Cause - &lt;/b&gt' + getCause
-        + '<br><br>&lt;b&gt;Resolution - &lt;/b&gtTo mitigate the issue GoTo engineers ' + getSolution
-        + '<br><br>&lt;b&gt;Slack Channel - &lt;/b&gt ' + getSlackChannel
-        + '<br><br>&lt;b&gt;Postmortem - &lt;/b&gtA detailed technical document will be shared in the incident slack channel'
+        + '<br><br>&lt;b&gt;Final Customer Reports - &lt;/b&gt' + getCustomerReports
+        + '<br>&lt;b&gt;Root Cause - &lt;/b&gtOur engineers identified the issue as being caused by ' + getCauseLowerCase
+        + '<br>&lt;b&gt;Resolution - &lt;/b&gtTo mitigate the issue GoTo engineers ' + getSolutionLowerCase
+        + '<br>&lt;b&gt;Slack Channel - &lt;/b&gt' + getSlackChannel
+        + '<br>&lt;b&gt;Postmortem - &lt;/b&gtA detailed technical document will be shared in the incident slack channel'
 
         // This section is specfically for the Comms Response Slack Channel
 
-        + '<br><h1>comms_response Channel - Retrospective</h1>'
-        + '@here'
+        + '<h1>comms_response Channel - Retrospective</h1>'
+        + '@here<br>'
         + '<br>We had a ' + cIncidentType + ' for ' + fixedProducts + '. This incident has been already resolved.'
-        + '<br><b>Timeline - </b>' + 'From ' + utcNewDate + ' to ' + endTime
+        + '<br><br><b>Timeline - </b>' + 'From ' + utcNewDate + ' to ' + endTime
         + '<br><b>Customer Impact - </b>' + newTitle
         + '<br><b>Final Customer Reports - </b>' + getCustomerReports
-        + '<br><b>Root Cause - </b>' + 'Our engineers identified the issue as being cause by ' + getCause
-        + '<br><b>Resolution - </b>' + getSolution
+        + '<br><b>Root Cause - </b>' + 'Our engineers identified the issue as being caused by ' + getCauseLowerCase
+        + '<br><b>Resolution - </b>' + 'To mitigate the issue GoTo engineers ' +  getSolutionLowerCase
         + '<br><b>Slack Channel - </b>' + getSlackChannel
         + '<br><b>Postmortem -</b> A detailed technical document will be shared in the incident slack channel'
 
